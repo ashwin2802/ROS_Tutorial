@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="rosbag" type="play" name="player" args="--clock $(find centre_detector)/bags/image.bag --loop">
+        <remap from="/magnus/camera/image_raw" to="image_raw"/>
+    </node>
+
+    <rosparam file="$(find centre_detector)/cfg/params.yaml" command="load"/>
+
+    <node pkg="centre_detector" type="detector_node" name="detector_node"/>
+</launch>
